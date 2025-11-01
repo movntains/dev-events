@@ -3,12 +3,12 @@ import Link from 'next/link';
 import EventCard from '@/components/EventCard';
 import { events } from '@/lib/constants';
 
-export default function page() {
+export default function Home() {
   return (
     <section className="space-y-20">
       <div className="flex flex-col items-center gap-y-7">
         <h1 className="flex flex-col gap-2 text-center">
-          <span>The Hub for Every Dev</span>
+          <span>The Hub for Every Dev </span>
           <span>Event You Can't Miss</span>
         </h1>
 
