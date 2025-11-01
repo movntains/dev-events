@@ -94,6 +94,10 @@
   @apply to-blue bg-linear-to-b from-white via-white bg-clip-text font-semibold text-transparent;
 }
 
+@utility glass {
+  @apply bg-[#12121280]/50 rounded-md bg-clip-padding backdrop-filter backdrop-blur-xl border-b border-border-dark;
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;
@@ -111,11 +115,11 @@
     @apply text-gradient text-6xl font-semibold max-sm:text-4xl;
   }
 
-  h3 {
+  h2 {
     @apply font-schibsted-grotesk text-2xl font-bold;
   }
 
   ul {
-    @apply list-disc list-inside;
+    @apply list-none;
   }
 }
