@@ -29,7 +29,10 @@
     },
     "domains": {
       "next": "recommended",
-      "react": "recommended"
+      "react": "recommended",
+      "qwik": "none",
+      "solid": "none",
+      "vue": "none"
     }
   },
   "assist": {
