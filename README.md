@@ -76,3 +76,21 @@ $ bun run test
 3. _(Optional)_ Set `Display name` to `DevEvents`, or whatever name you'd like to call the project.
 4. Scroll down to the bottom of the `General` tab and copy your `Project API key`. Set that value as the value for `NEXT_PUBLIC_POSTHOG_KEY` in your `.env` file.
 5. Use the [PostHog documentation](https://posthog.com/docs) to create insights and dashboards, turn on error tracking, etc.
+
+## MongoDB Setup
+
+1. [Create a free MongoDB Atlas account](https://www.mongodb.com/cloud/atlas/register) if you don't have one already.
+2. Create a new project.
+3. Create a cluster.
+   - Choose the free tier.
+   - Select the region that's closest to you.
+   - Click `Create Deployment`.
+4. Click `Create Database User`.
+5. Click `Choose a connection method`.
+6. Click `Drivers` under `Connect to your application`.
+7. Wait for the cluster to finish provisioning, and then copy the connection string. Set it as the value for the `MONGODB_URI` variable in your `.env` file.
+8. In the side navigation, click `Database and Network Access` underneath `Security`.
+   - Click on `IP Access List`.
+   - Click `Add IP Address`.
+   - Click `Allow Access from Anywhere` and click `Confirm`.
+     - This is necessary for connecting after deployment.
