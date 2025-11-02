@@ -11,7 +11,7 @@ export default defineConfig({
       enabled: true,
       include: ['src/**/*.{ts,tsx}'],
       exclude: ['src/app/layout.tsx', 'src/components/ui/*', 'src/types/*'],
-      reporter: ['text'],
+      reporter: ['text', 'json'],
     },
   },
 });
