@@ -10,7 +10,7 @@ export default defineConfig({
     coverage: {
       enabled: true,
       include: ['src/**/*.{ts,tsx}'],
-      exclude: ['src/app/layout.tsx', 'src/components/ui/*', 'src/types/*'],
+      exclude: ['src/app/layout.tsx', 'src/components/ui/*', 'src/models/*', 'src/types/*'],
       reporter: ['text', 'json'],
     },
   },
