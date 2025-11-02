@@ -24,11 +24,12 @@ export function normalizeTime(timeString: string): string {
   const match = timeString.trim().match(TIME_REGEX);
 
   if (!match) {
-    throw new Error('Invalid time format. Use HH:MM or HH:MM AM/PM');
+    throw new Error('Invalid time format. Use HH:MM or HH:MM AM/PM.');
   }
 
   let hours = parseInt(match[1], 10);
-  const minutes = parseInt(match[2], 10);
+  // Using parseInt() here would result in incorect minutes for "00" (e.g., 11:00)
+  const minutes = match[2];
   const period = match[4]?.toUpperCase();
 
   if (period) {
@@ -41,7 +42,7 @@ export function normalizeTime(timeString: string): string {
     }
   }
 
-  if (hours < 0 || hours > 23 || minutes < 0 || minutes > 59) {
+  if (hours < 0 || hours > 23 || parseInt(match[2], 10) < 0 || parseInt(match[2], 10) > 59) {
     throw new Error('Invalid time values');
   }
 
