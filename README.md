@@ -1,8 +1,3 @@
-<div aria-hidden="true" style="width: 100%; height: 100px; background-color: oklch(87.2% 0.01 258.338); display: flex; align-items: center; justify-content: center; gap: 1rem;">
-  <img src="public/icons/logo.svg" style="height: 80%;" alt="" />
-  <span style="color: oklch(13% 0.028 261.692); font-size: 2rem; font-weight: 600">DevEvents</span>
-</div>
-
 # DevEvents
 
 > _DevEvents_ is a web application for browsing, creating, and managing events (e.g., hackathons, meetups, conferences) related to software development.
