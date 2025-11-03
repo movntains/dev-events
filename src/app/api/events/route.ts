@@ -7,6 +7,26 @@ import type { IEvent } from '@/types/models';
 
 type EventInput = Omit<IEvent, keyof Document | 'createdAt' | 'updatedAt'>;
 
+export async function GET() {
+  try {
+    await connectDB();
+
+    const events = await Event.find().sort({ createdAt: -1 });
+
+    return NextResponse.json({ message: 'Events fetched successfully.', events }, { status: 200 });
+  } catch (error) {
+    console.error(error);
+
+    return NextResponse.json(
+      {
+        message: 'Event fetching failed.',
+        error: error instanceof Error ? error.message : 'Unknown',
+      },
+      { status: 500 },
+    );
+  }
+}
+
 export async function POST(req: NextRequest) {
   try {
     await connectDB();
@@ -49,9 +69,12 @@ export async function POST(req: NextRequest) {
   } catch (error) {
     console.error(error);
 
-    return NextResponse.json({
-      message: 'Event creation failed',
-      error: error instanceof Error ? error.message : 'Unknown',
-    });
+    return NextResponse.json(
+      {
+        message: 'Event creation failed',
+        error: error instanceof Error ? error.message : 'Unknown',
+      },
+      { status: 500 },
+    );
   }
 }
