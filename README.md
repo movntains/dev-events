@@ -94,3 +94,20 @@ $ bun run test
    - Click `Add IP Address`.
    - Click `Allow Access from Anywhere` and click `Confirm`.
      - This is necessary for connecting after deployment.
+
+## Cloudinary Setup
+
+1. [Create a free Cloudinary account](https://cloudinary.com) if you don't have one already.
+   - Go through the onboarding if you've just created an account.
+2. Click on the settings icon in the side navigation.
+3. Click on `Upload`, then click on `Add Upload Preset`.
+   - Provide any preset name you'd like.
+   - Set `Signing mode` as `Unsigned`.
+   - Set `Folder` to `events`.
+   - Click `Save`.
+4. Click on `API Keys` in the navigation.
+   - Copy the `CLOUDINARY_URL` value in the `API environment variable` section and paste it as the value for the `CLOUDINARY_URL` environment variable in your `.env` file.
+   - Click `Generate New API Key`. Enter the confirmation code sent to your email.
+   - Copy the `API Key` value shown in the table and replace `<your_api_key>` in your `CLOUDINARY_URL` value with the key you just copied.
+   - Copy the `API Secret` value shown in the table and replace `<your_api_secret>` in your `CLOUDINARY_URL` with the secret you just copied.
+   - _(Optional)_ You can rename your API key to something more specific, rather than leaving the default key name of `Untitled`.
