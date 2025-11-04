@@ -15,8 +15,6 @@ export async function GET() {
 
     return NextResponse.json({ message: 'Events fetched successfully.', events }, { status: 200 });
   } catch (error) {
-    console.error(error);
-
     return NextResponse.json(
       {
         message: 'Event fetching failed.',
@@ -37,9 +35,7 @@ export async function POST(req: NextRequest) {
 
     try {
       event = Object.fromEntries(formData.entries()) as unknown as EventInput;
-    } catch (error) {
-      console.error(error);
-
+    } catch (_) {
       return NextResponse.json({ message: 'Invalid JSON data format.' }, { status: 400 });
     }
 
@@ -67,8 +63,6 @@ export async function POST(req: NextRequest) {
       { status: 201 },
     );
   } catch (error) {
-    console.error(error);
-
     return NextResponse.json(
       {
         message: 'Event creation failed',
