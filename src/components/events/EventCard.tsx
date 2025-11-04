@@ -13,6 +13,7 @@ export default function EventCard({ event }: EventCardProps) {
     <Link
       href={`/events/${slug}`}
       className="flex flex-col gap-3"
+      aria-labelledby={`event-card-${slug}-title`}
     >
       <Image
         src={image}
@@ -34,7 +35,12 @@ export default function EventCard({ event }: EventCardProps) {
         <p className="text-light-200 text-sm font-light">{location}</p>
       </div>
 
-      <p className="text-[20px] font-semibold line-clamp-1">{title}</p>
+      <h3
+        className="text-[20px] font-semibold line-clamp-1"
+        id={`event-card-${slug}-title`}
+      >
+        {title}
+      </h3>
 
       <div className="text-light-200 flex flex-row flex-wrap items-center gap-4">
         <div className="flex flex-row gap-2">

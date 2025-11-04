@@ -1,5 +1,5 @@
-import type { NextRequest } from 'next/server';
-import { NextResponse } from 'next/server';
+import type { SortOrder } from 'mongoose';
+import { type NextRequest, NextResponse } from 'next/server';
 import { uploadFileToCloudinary } from '@/lib/cloudinary';
 import connectDB from '@/lib/mongodb';
 import Event from '@/models/Event';
@@ -7,11 +7,22 @@ import type { IEvent } from '@/types/models';
 
 type EventInput = Omit<IEvent, keyof Document | 'createdAt' | 'updatedAt'>;
 
-export async function GET() {
+export async function GET(req: NextRequest) {
   try {
     await connectDB();
 
-    const events = await Event.find().sort({ createdAt: -1 });
+    const searchParams = req.nextUrl.searchParams;
+    const sortBy = searchParams.get('sort') || 'createdAt';
+
+    const sortOptions: Record<string, { [key: string]: SortOrder }> = {
+      createdAt: { createdAt: 'desc' },
+      date: { date: 'asc' },
+      title: { title: 'asc' },
+    };
+
+    const sortCriteria = sortOptions[sortBy] || sortOptions.createdAt;
+
+    const events = await Event.find().sort(sortCriteria);
 
     return NextResponse.json({ message: 'Events fetched successfully.', events }, { status: 200 });
   } catch (error) {
