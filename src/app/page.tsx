@@ -1,9 +1,19 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import EventCard from '@/components/EventCard';
-import { events } from '@/lib/constants';
+import EmptyEvents from '@/components/events/EmptyEvents';
+import EventCard from '@/components/events/EventCard';
+import type { GetEventsResponse } from '@/types/api/events';
 
-export default function Home() {
+export default async function Home() {
+  const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/events`);
+  const data = (await response.json()) as GetEventsResponse;
+
+  if ('error' in data) {
+    throw new Error(data.message);
+  }
+
+  const { events } = data;
+
   return (
     <section className="space-y-20">
       <div className="flex flex-col items-center gap-y-7">
@@ -35,13 +45,17 @@ export default function Home() {
       <div className="space-y-7">
         <h2>Featured Events</h2>
 
-        <ul className="grid gap-10 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-          {events.map((event) => (
-            <li key={event.title}>
-              <EventCard event={event} />
-            </li>
-          ))}
-        </ul>
+        {events.length > 0 && (
+          <ul className="grid gap-10 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+            {events.map((event) => (
+              <li key={event.title}>
+                <EventCard event={event} />
+              </li>
+            ))}
+          </ul>
+        )}
+
+        {events.length === 0 && <EmptyEvents />}
       </div>
     </section>
   );
