@@ -3,10 +3,13 @@
 import { useRouter, useSearchParams } from 'next/navigation';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/select';
 
+const VALID_SORT_VALUES = ['createdAt', 'date', 'title'];
+
 export default function EventsSorter() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const currentSort = searchParams.get('sort') || '';
+  const sortParam = searchParams.get('sort');
+  const currentSort = sortParam && VALID_SORT_VALUES.includes(sortParam) ? sortParam : '';
 
   const handleSortChange = (value: string): void => {
     const params = new URLSearchParams(searchParams.toString());
