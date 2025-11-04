@@ -2,10 +2,20 @@ import Image from 'next/image';
 import Link from 'next/link';
 import EmptyEvents from '@/components/events/EmptyEvents';
 import EventCard from '@/components/events/EventCard';
+import EventsSorter from '@/components/events/EventsSorter';
 import type { GetEventsResponse } from '@/types/api/events';
 
-export default async function Home() {
-  const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/events`);
+interface HomePageProps {
+  searchParams: Promise<{
+    sort?: string;
+  }>;
+}
+
+export default async function Home({ searchParams }: HomePageProps) {
+  const params = await searchParams;
+  const sort = params.sort || 'createdAt';
+
+  const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/events?sort=${sort}`);
   const data = (await response.json()) as GetEventsResponse;
 
   if ('error' in data) {
@@ -43,7 +53,11 @@ export default async function Home() {
       </div>
 
       <div className="space-y-7">
-        <h2>Featured Events</h2>
+        <div className="flex flex-col gap-4 md:gap-0 md:flex-row md:justify-between">
+          <h2>Featured Events</h2>
+
+          <EventsSorter />
+        </div>
 
         {events.length > 0 && (
           <ul className="grid gap-10 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
