@@ -56,7 +56,7 @@ export default async function Home({ searchParams }: HomePageProps) {
         <div className="flex flex-col gap-4 md:gap-0 md:flex-row md:justify-between">
           <h2>Featured Events</h2>
 
-          <EventsSorter />
+          {events.length > 0 && <EventsSorter />}
         </div>
 
         {events.length > 0 && (
