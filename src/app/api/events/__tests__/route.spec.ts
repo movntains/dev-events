@@ -15,6 +15,7 @@ vi.mock('@/models/Event', () => ({
 const mockConnectDB = vi.fn();
 const mockUploadFileToCloudinary = vi.fn();
 const mockEventFind = vi.fn();
+const mockEventSort = vi.fn();
 const mockEventCreate = vi.fn();
 
 describe('Events API Routes', () => {
@@ -32,18 +33,81 @@ describe('Events API Routes', () => {
   });
 
   describe('GET Route', () => {
-    it('returns all events', async () => {
+    it('returns all events and sorts by "createdAt" by default', async () => {
+      const mockRequest = {
+        nextUrl: {
+          searchParams: {
+            get: vi.fn(),
+          },
+        },
+      } as unknown as NextRequest;
+
       const mockEvents = events;
 
       mockEventFind.mockReturnValueOnce({
-        sort: vi.fn().mockResolvedValue(mockEvents),
+        sort: mockEventSort.mockResolvedValueOnce(mockEvents),
       });
 
-      const response = await GET();
+      const response = await GET(mockRequest);
       const data = await response.json();
 
       expect(mockConnectDB).toHaveBeenCalled();
       expect(mockEventFind).toHaveBeenCalled();
+      expect(mockEventSort).toHaveBeenCalledWith({ createdAt: 'desc' });
+
+      expect(response.status).toBe(200);
+      expect(data.message).toBe('Events fetched successfully.');
+      expect(data.events).toEqual(mockEvents);
+    });
+
+    it('sorts events by the given "sort" parameter', async () => {
+      const mockRequest = {
+        nextUrl: {
+          searchParams: {
+            get: vi.fn().mockReturnValueOnce('title'),
+          },
+        },
+      } as unknown as NextRequest;
+
+      const mockEvents = events;
+
+      mockEventFind.mockReturnValueOnce({
+        sort: mockEventSort.mockResolvedValueOnce(mockEvents),
+      });
+
+      const response = await GET(mockRequest);
+      const data = await response.json();
+
+      expect(mockConnectDB).toHaveBeenCalled();
+      expect(mockEventFind).toHaveBeenCalled();
+      expect(mockEventSort).toHaveBeenCalledWith({ title: 'asc' });
+
+      expect(response.status).toBe(200);
+      expect(data.message).toBe('Events fetched successfully.');
+      expect(data.events).toEqual(mockEvents);
+    });
+
+    it('sorts events by "createdAt" if an invalid sort parameter is provided', async () => {
+      const mockRequest = {
+        nextUrl: {
+          searchParams: {
+            get: vi.fn().mockReturnValueOnce('invalid'),
+          },
+        },
+      } as unknown as NextRequest;
+
+      const mockEvents = events;
+
+      mockEventFind.mockReturnValueOnce({
+        sort: mockEventSort.mockResolvedValueOnce(mockEvents),
+      });
+
+      const response = await GET(mockRequest);
+      const data = await response.json();
+
+      expect(mockConnectDB).toHaveBeenCalled();
+      expect(mockEventFind).toHaveBeenCalled();
+      expect(mockEventSort).toHaveBeenCalledWith({ createdAt: 'desc' });
 
       expect(response.status).toBe(200);
       expect(data.message).toBe('Events fetched successfully.');
@@ -51,11 +115,19 @@ describe('Events API Routes', () => {
     });
 
     it('handles errors when fetching all events', async () => {
+      const mockRequest = {
+        nextUrl: {
+          searchParams: {
+            get: vi.fn(),
+          },
+        },
+      } as unknown as NextRequest;
+
       mockEventFind.mockReturnValueOnce({
         sort: vi.fn().mockRejectedValueOnce(new Error('DB Error')),
       });
 
-      const response = await GET();
+      const response = await GET(mockRequest);
       const data = await response.json();
 
       expect(response.status).toBe(500);
@@ -64,11 +136,19 @@ describe('Events API Routes', () => {
     });
 
     it('returns an error of "Unknown" if the error is not an instance of Error', async () => {
+      const mockRequest = {
+        nextUrl: {
+          searchParams: {
+            get: vi.fn(),
+          },
+        },
+      } as unknown as NextRequest;
+
       mockEventFind.mockReturnValueOnce({
         sort: vi.fn().mockRejectedValueOnce('Failed'),
       });
 
-      const response = await GET();
+      const response = await GET(mockRequest);
       const data = await response.json();
 
       expect(response.status).toBe(500);
