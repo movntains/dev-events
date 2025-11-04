@@ -1,0 +1,86 @@
+type: http_request
+model: http_request
+id: rq_HJ2HnH4QRu
+createdAt: 2025-11-03T20:55:45.138305
+updatedAt: 2025-11-03T22:26:42.068906
+workspaceId: wk_UkmudYKHUW
+folderId: fl_yW9ZzDLnxD
+authentication: {}
+authenticationType: null
+body:
+  form:
+  - enabled: true
+    id: isy6rrIp5H
+    name: title
+    value: Google Cloud Next 2026
+  - enabled: true
+    id: RmuzvVeEiV
+    name: description
+    value: Google's premier cloud computing event, showcasing innovations in AI, infrastructure, and enterprise solutions.
+  - enabled: true
+    id: 00HZ0fBQje
+    name: overview
+    value: Cloud Next 2026 highlights the latest in cloud-native development, Kubernetes, AI, and enterprise scalability. Developers, architects, and executives gather to learn about new Google Cloud services, best practices, and success stories.
+  - enabled: true
+    file: /Users/echor/Desktop/photo-1587825140708-dfaf72ae4b04.avif
+    id: ZmrtXwJhTJ
+    name: image
+  - enabled: true
+    id: 86QnKvGFgj
+    name: venue
+    value: Mandalay Bay Convention Center
+  - enabled: true
+    id: Zra6rFzS99
+    name: location
+    value: Las Vegas, NV
+  - enabled: true
+    id: zjHYNuNtij
+    name: date
+    value: 2026-04-22
+  - enabled: true
+    id: swVtQmuFUm
+    name: time
+    value: 08:30
+  - enabled: true
+    id: ycZjCIGNy6
+    name: mode
+    value: hybrid
+  - enabled: true
+    id: 5VD5e83JJF
+    name: audience
+    value: Cloud engineers, DevOps, enterprise leaders, AI researchers
+  - enabled: true
+    id: I7rm6FjMRI
+    name: agenda
+    value: |-
+      [
+        "08:30 AM - 09:30 AM | Keynote: AI-Driven Cloud Infrastructure",
+        "09:45 AM - 11:00 AM | Deep Dives: Kubernetes, Data Analytics, Security",
+        "11:15 AM - 12:30 PM | Product Demos & Networking",
+        "12:30 PM - 01:30 PM | Lunch",
+        "01:30 PM - 03:00 PM | Workshops: Scaling with GCP",
+        "03:15 PM - 04:30 PM | Fireside Chat: The Future of Enterprise Cloud"
+      ]
+  - enabled: true
+    id: yQGvBFQXGi
+    name: organizer
+    value: Google Cloud organizes Cloud Next to connect global businesses, developers, and innovators with the latest technologies and best practices in cloud computing.
+  - enabled: true
+    id: uCt6t6uP7M
+    name: tags
+    value: '["Cloud", "DevOps", "Kubernetes", "AI"]'
+bodyType: multipart/form-data
+description: |-
+  Create a new event.
+
+  The `image` form value should be an uploaded file rather than a URL, because the image will be uploaded to Cloudinary.
+headers:
+- enabled: true
+  name: Content-Type
+  value: multipart/form-data
+  id: DsPU9kzyCR
+method: POST
+name: Create Event
+sortPriority: 1000.0
+url: http://localhost:3000/api/events
+urlParameters: []

@@ -1,0 +1,14 @@
+type: workspace
+model: workspace
+id: wk_UkmudYKHUW
+createdAt: 2025-11-03T20:55:13.756248
+updatedAt: 2025-11-03T20:55:13.756248
+authentication: {}
+authenticationType: null
+description: ''
+headers: []
+name: DevEvents
+encryptionKeyChallenge: null
+settingValidateCertificates: true
+settingFollowRedirects: true
+settingRequestTimeout: 0

@@ -1,0 +1,18 @@
+type: http_request
+model: http_request
+id: rq_cd6KLmRfe4
+createdAt: 2025-11-03T22:19:44.313017
+updatedAt: 2025-11-03T22:25:59.996069
+workspaceId: wk_UkmudYKHUW
+folderId: fl_yW9ZzDLnxD
+authentication: {}
+authenticationType: null
+body: {}
+bodyType: null
+description: List all events.
+headers: []
+method: GET
+name: List Events
+sortPriority: 0.0
+url: http://localhost:3000/api/events
+urlParameters: []
