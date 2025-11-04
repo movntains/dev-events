@@ -9,9 +9,10 @@ export default defineConfig({
     globals: true,
     coverage: {
       enabled: true,
+      provider: 'v8',
       include: ['src/**/*.{ts,tsx}'],
       exclude: ['src/app/layout.tsx', 'src/components/ui/*', 'src/models/*', 'src/types/*'],
-      reporter: ['text', 'json'],
+      reporter: ['text', 'json', 'json-summary', 'lcov'],
     },
   },
 });
