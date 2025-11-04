@@ -22,9 +22,9 @@ describe('Event Card Component', () => {
     render(<EventCard event={event} />);
 
     expect(screen.getAllByRole('img')[0].getAttribute('alt')).toBe(event.title);
+    expect(screen.getByRole('heading').textContent).toBe(event.title);
     expect(screen.getAllByRole('paragraph')[0].textContent).toBe(event.location);
-    expect(screen.getAllByRole('paragraph')[1].textContent).toBe(event.title);
-    expect(screen.getAllByRole('paragraph')[2].textContent).toBe(event.date);
-    expect(screen.getAllByRole('paragraph')[3].textContent).toBe(event.time);
+    expect(screen.getAllByRole('paragraph')[1].textContent).toBe(event.date);
+    expect(screen.getAllByRole('paragraph')[2].textContent).toBe(event.time);
   });
 });
