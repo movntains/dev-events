@@ -109,7 +109,6 @@ EventSchema.pre('save', function (next) {
   next();
 });
 
-EventSchema.index({ slug: 1 }, { unique: true });
 EventSchema.index({ date: 1, mode: 1 });
 
 const Event = models.Event || model<IEvent>('Event', EventSchema);
